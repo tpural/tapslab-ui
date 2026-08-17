@@ -1,0 +1,66 @@
+/*
+ * Maps the semantic custom properties onto Tailwind utilities, so apps write
+ * `bg-surface-raised` / `text-ink-muted` / `border-border-strong` and never a
+ * literal hue.
+ *
+ * `@theme inline` rather than `@theme`: inline emits `var(--surface)` into the
+ * utility instead of copying the value at build time, which is the whole point
+ * here -- the utility has to resolve through whatever `[data-theme]` is
+ * currently on <html>, not freeze the default theme's colours into the CSS.
+ *
+ * Import order in an app's globals.css matters:
+ *
+ *   @import "tailwindcss";
+ *   @import "@tapslab/ui/themes.css";    // defines the custom properties
+ *   @import "@tapslab/ui/tailwind.css";  // maps them to utilities
+ *   @source "../../node_modules/@tapslab/ui/src";  // scan the lib for classes
+ */
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+
+  --color-primary: var(--primary);
+  --color-primary-ink: var(--primary-ink);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-ink: var(--secondary-ink);
+
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
+
+  --color-warn: var(--warn);
+  --color-warn-ink: var(--warn-ink);
+  --color-warn-text: var(--warn-text);
+
+  --color-success: var(--success);
+  --color-success-ink: var(--success-ink);
+  --color-success-text: var(--success-text);
+
+  --color-danger: var(--danger);
+  --color-danger-ink: var(--danger-ink);
+  --color-danger-text: var(--danger-text);
+
+  --color-focus: var(--focus);
+}
+
+/*
+ * Focus is a token rather than a per-component decision, so every focusable
+ * thing in every theme lands on a ring that has been contrast-checked. Uses
+ * :focus-visible so pointer users do not see rings on click.
+ */
+@layer base {
+  *:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+}

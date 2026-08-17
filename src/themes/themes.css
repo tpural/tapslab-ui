@@ -1,0 +1,192 @@
+/*
+ * GENERATED FILE -- do not edit.
+ *
+ * Source of truth is src/themes/*.ts. Regenerate with `npm run themes:build`.
+ * CI runs `npm run themes:check`, which fails if this file has drifted from
+ * the TypeScript definitions or if any theme breaks the contrast rules in
+ * scripts/contrast.ts.
+ *
+ * Themes: tide, ember
+ */
+
+/* ---------------------------------------------------------------- tide */
+
+[data-theme="tide"] {
+  color-scheme: light;
+  --surface: #f4f7f6;
+  --surface-raised: #ffffff;
+  --surface-sunken: #e9efee;
+  --border: #d7e2e0;
+  --border-strong: #7d9390;
+  --ink: #051821;
+  --ink-muted: #33514f;
+  --ink-subtle: #456663;
+  --primary: #1a4645;
+  --primary-ink: #ffffff;
+  --secondary: #266867;
+  --secondary-ink: #ffffff;
+  --accent: #f58800;
+  --accent-ink: #051821;
+  --accent-text: #8f4a00;
+  --warn: #f8bc24;
+  --warn-ink: #051821;
+  --warn-text: #755300;
+  --success: #266867;
+  --success-ink: #ffffff;
+  --success-text: #1c4f4e;
+  --danger: #b3352a;
+  --danger-ink: #ffffff;
+  --danger-text: #9c2d23;
+  --focus: #1a4645;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="tide"]:not([data-mode="light"]) {
+    color-scheme: dark;
+    --surface: #051821;
+    --surface-raised: #0c282a;
+    --surface-sunken: #03121a;
+    --border: #1a4645;
+    --border-strong: #3a7f7d;
+    --ink: #eaf2f1;
+    --ink-muted: #a9bfbe;
+    --ink-subtle: #8aa4a2;
+    --primary: #4e9c9a;
+    --primary-ink: #051821;
+    --secondary: #266867;
+    --secondary-ink: #eaf2f1;
+    --accent: #f58800;
+    --accent-ink: #051821;
+    --accent-text: #ffab4d;
+    --warn: #f8bc24;
+    --warn-ink: #051821;
+    --warn-text: #f8cf6b;
+    --success: #46a3a1;
+    --success-ink: #051821;
+    --success-text: #6fc9c7;
+    --danger: #e0594c;
+    --danger-ink: #051821;
+    --danger-text: #ff9084;
+    --focus: #7fd4d2;
+  }
+}
+
+[data-theme="tide"][data-mode="dark"] {
+  color-scheme: dark;
+  --surface: #051821;
+  --surface-raised: #0c282a;
+  --surface-sunken: #03121a;
+  --border: #1a4645;
+  --border-strong: #3a7f7d;
+  --ink: #eaf2f1;
+  --ink-muted: #a9bfbe;
+  --ink-subtle: #8aa4a2;
+  --primary: #4e9c9a;
+  --primary-ink: #051821;
+  --secondary: #266867;
+  --secondary-ink: #eaf2f1;
+  --accent: #f58800;
+  --accent-ink: #051821;
+  --accent-text: #ffab4d;
+  --warn: #f8bc24;
+  --warn-ink: #051821;
+  --warn-text: #f8cf6b;
+  --success: #46a3a1;
+  --success-ink: #051821;
+  --success-text: #6fc9c7;
+  --danger: #e0594c;
+  --danger-ink: #051821;
+  --danger-text: #ff9084;
+  --focus: #7fd4d2;
+}
+
+/* ---------------------------------------------------------------- ember */
+
+[data-theme="ember"] {
+  color-scheme: light;
+  --surface: #fbf7f4;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f2eae3;
+  --border: #e5d8cd;
+  --border-strong: #a28b77;
+  --ink: #1f1410;
+  --ink-muted: #4c3a31;
+  --ink-subtle: #634f44;
+  --primary: #9a3412;
+  --primary-ink: #ffffff;
+  --secondary: #6b2d5c;
+  --secondary-ink: #ffffff;
+  --accent: #eab308;
+  --accent-ink: #1f1410;
+  --accent-text: #7a5c00;
+  --warn: #f59e0b;
+  --warn-ink: #1f1410;
+  --warn-text: #7f5205;
+  --success: #2f7d4f;
+  --success-ink: #ffffff;
+  --success-text: #256540;
+  --danger: #b3261e;
+  --danger-ink: #ffffff;
+  --danger-text: #9c211a;
+  --focus: #9a3412;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="ember"]:not([data-mode="light"]) {
+    color-scheme: dark;
+    --surface: #191210;
+    --surface-raised: #241a17;
+    --surface-sunken: #100b09;
+    --border: #3a2b25;
+    --border-strong: #7b6357;
+    --ink: #f5ece6;
+    --ink-muted: #c6b2a7;
+    --ink-subtle: #a48e81;
+    --primary: #e07444;
+    --primary-ink: #191210;
+    --secondary: #c07fb4;
+    --secondary-ink: #191210;
+    --accent: #eab308;
+    --accent-ink: #191210;
+    --accent-text: #f2c744;
+    --warn: #f59e0b;
+    --warn-ink: #191210;
+    --warn-text: #f7b955;
+    --success: #4caf7d;
+    --success-ink: #191210;
+    --success-text: #79cfa2;
+    --danger: #e5584d;
+    --danger-ink: #191210;
+    --danger-text: #ff9086;
+    --focus: #f0a878;
+  }
+}
+
+[data-theme="ember"][data-mode="dark"] {
+  color-scheme: dark;
+  --surface: #191210;
+  --surface-raised: #241a17;
+  --surface-sunken: #100b09;
+  --border: #3a2b25;
+  --border-strong: #7b6357;
+  --ink: #f5ece6;
+  --ink-muted: #c6b2a7;
+  --ink-subtle: #a48e81;
+  --primary: #e07444;
+  --primary-ink: #191210;
+  --secondary: #c07fb4;
+  --secondary-ink: #191210;
+  --accent: #eab308;
+  --accent-ink: #191210;
+  --accent-text: #f2c744;
+  --warn: #f59e0b;
+  --warn-ink: #191210;
+  --warn-text: #f7b955;
+  --success: #4caf7d;
+  --success-ink: #191210;
+  --success-text: #79cfa2;
+  --danger: #e5584d;
+  --danger-ink: #191210;
+  --danger-text: #ff9086;
+  --focus: #f0a878;
+}
