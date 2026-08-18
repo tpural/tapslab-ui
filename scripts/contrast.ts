@@ -71,6 +71,7 @@ export const RULES: Rule[] = [
   { fg: "focus", bg: "surface", min: 3.0, why: "focus ring on the page" },
   { fg: "focus", bg: "surfaceRaised", min: 3.0, why: "focus ring in cards" },
   { fg: "focus", bg: "surfaceSunken", min: 3.0, why: "focus ring on an input" },
+
   { fg: "borderStrong", bg: "surface", min: 3.0, why: "meaningful boundary" },
   { fg: "borderStrong", bg: "surfaceRaised", min: 3.0, why: "meaningful boundary in cards" },
 ];
@@ -80,10 +81,8 @@ export type Violation = {
   mode: "light" | "dark";
   fg: string;
   bg: string;
-  actual: number;
-  min: number;
   why: string;
-};
+} & ({ kind: "ratio"; actual: number; min: number } | { kind: "distinct" });
 
 export function checkTokens(
   themeId: string,
@@ -95,6 +94,7 @@ export function checkTokens(
     const actual = contrast(tokens[rule.fg], tokens[rule.bg]);
     if (actual < rule.min) {
       out.push({
+        kind: "ratio",
         theme: themeId,
         mode,
         fg: rule.fg,
@@ -106,4 +106,38 @@ export function checkTokens(
     }
   }
   return out;
+}
+
+/**
+ * The ring sits 2px outside its control, on the page ground, so a ratio
+ * against the fill is the wrong test -- and an impossible one, since no single
+ * colour clears 3:1 against a dark primary, a mid red and a light orange at
+ * once. What matters is that the ring cannot be mistaken for the control it
+ * surrounds: `focus` equal to `primary` renders as a slightly larger button
+ * with a hairline gap rather than as a focus indicator.
+ */
+const FOCUS_MUST_DIFFER_FROM = [
+  "primary",
+  "secondary",
+  "accent",
+  "warn",
+  "success",
+  "danger",
+] as const;
+
+export function checkFocusDistinct(
+  themeId: string,
+  mode: "light" | "dark",
+  tokens: ThemeTokens,
+): Violation[] {
+  return FOCUS_MUST_DIFFER_FROM.filter(
+    (role) => tokens[role].toLowerCase() === tokens.focus.toLowerCase(),
+  ).map((role) => ({
+    kind: "distinct" as const,
+    theme: themeId,
+    mode,
+    fg: "focus",
+    bg: role,
+    why: `identical to \`${role}\`, so the ring reads as part of the control`,
+  }));
 }

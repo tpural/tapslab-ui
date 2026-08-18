@@ -37,7 +37,7 @@
   --danger: #b3352a;
   --danger-ink: #ffffff;
   --danger-text: #9c2d23;
-  --focus: #1a4645;
+  --focus: #2f8583;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -128,7 +128,7 @@
   --danger: #b3261e;
   --danger-ink: #ffffff;
   --danger-text: #9c211a;
-  --focus: #9a3412;
+  --focus: #175d78;
 }
 
 @media (prefers-color-scheme: dark) {

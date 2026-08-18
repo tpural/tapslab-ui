@@ -51,7 +51,11 @@ export const ember = defineTheme({
     dangerInk: "#ffffff",
     dangerText: "#9c211a",
 
-    focus: "#9a3412",
+    // The second colour outside the source palette, after danger. Every warm
+    // hue here is already a role, so a focus ring drawn in one of them reads
+    // as the control rather than as focus; cool blue is the only value left
+    // that cannot be mistaken for something else on this ground.
+    focus: "#175d78",
   },
 
   dark: {

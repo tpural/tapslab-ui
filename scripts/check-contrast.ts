@@ -9,13 +9,15 @@
  * Run with:  node --experimental-strip-types scripts/check-contrast.ts
  */
 import { themes } from "../src/themes/index";
-import { checkTokens, RULES, type Violation } from "./contrast";
+import { checkFocusDistinct, checkTokens, RULES, type Violation } from "./contrast";
 
 const violations: Violation[] = [];
 
 for (const theme of themes) {
   violations.push(...checkTokens(theme.id, "light", theme.light));
   violations.push(...checkTokens(theme.id, "dark", theme.dark));
+  violations.push(...checkFocusDistinct(theme.id, "light", theme.light));
+  violations.push(...checkFocusDistinct(theme.id, "dark", theme.dark));
 }
 
 const checked = themes.length * RULES.length * 2;
@@ -27,10 +29,11 @@ if (violations.length === 0) {
 
 console.error(`\nContrast failures (${violations.length} of ${checked} pairs):\n`);
 for (const v of violations) {
-  console.error(
-    `  ${v.theme}/${v.mode}: ${v.fg} on ${v.bg} = ${v.actual.toFixed(2)}:1 ` +
-      `(need ${v.min.toFixed(1)}:1)\n    → ${v.why}`,
-  );
+  const detail =
+    v.kind === "ratio"
+      ? `${v.fg} on ${v.bg} = ${v.actual.toFixed(2)}:1 (need ${v.min.toFixed(1)}:1)`
+      : `${v.fg} is ${v.why}`;
+  console.error(`  ${v.theme}/${v.mode}: ${detail}${v.kind === "ratio" ? `\n    → ${v.why}` : ""}`);
 }
 console.error("\nAdjust the tokens in src/themes/, then re-run.\n");
 process.exit(1);

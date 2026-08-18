@@ -57,8 +57,11 @@ export const tide = defineTheme({
     dangerText: "#9c2d23",
 
     // Raw orange cannot be the focus ring on a light ground -- it is 2.36:1
-    // against #f4f7f6, under the 3:1 that non-text contrast requires.
-    focus: "#1a4645",
+    // against #f4f7f6, under the 3:1 that non-text contrast requires. It also
+    // cannot be `primary`: the ring sits 2px outside the control, so matching
+    // it just makes a primary button look slightly bigger when focused. A
+    // lighter teal clears both.
+    focus: "#2f8583",
   },
 
   dark: {
