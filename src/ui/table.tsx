@@ -5,10 +5,15 @@ import { cn } from "../lib/cn";
  * The wrapper's `overflow-x-auto` is not optional. A table wide enough to
  * overflow will otherwise push the whole page sideways on a phone, and the
  * horizontal scrollbar belongs to the table, not the document.
+ *
+ * `relative` is load-bearing for the same reason. `sr-only` is positioned but
+ * sets no offsets, so a visually-hidden label in a cell scrolled out of view
+ * resolves against the initial containing block and stretches the document out
+ * to reach it -- reintroducing the sideways scroll this wrapper just prevented.
  */
 export function Table({ className, ...props }: ComponentProps<"table">) {
   return (
-    <div className="w-full overflow-x-auto rounded-lg border border-border">
+    <div className="relative w-full overflow-x-auto rounded-lg border border-border">
       <table className={cn("w-full caption-bottom text-sm", className)} {...props} />
     </div>
   );
