@@ -3,101 +3,102 @@ import { defineTheme } from "./tokens";
 /**
  * Tide -- deep teal and warm orange.
  *
- * Carried over from the family-tracker palette, whose five source colours are
- * #051821, #1A4645, #266867, #F58800, #F8BC24. The neutrals and states below
- * are derived from those.
+ * Authored in oklch so the ramps are perceptually even: a step of 0.05 in L
+ * looks like the same step everywhere, which hex cannot promise. It is also
+ * what lets components derive hover and tint states with `color-mix()` instead
+ * of adding a hand-picked token for every state.
  *
- * The warm pair carries DARK ink in both modes: white on #F58800 is 2.50:1 and
- * on #F8BC24 is 1.72:1, while #051821 on them is 7.25:1 and 10.53:1. The teals
- * are surfaces rather than text on the dark ground (#1A4645 is 1.73:1 there),
- * which is why the dark mode `successText` is a lightened teal rather than the
- * fill colour.
+ * Hues are fixed per role and only L and C move: teal 185 carries the brand and
+ * bleeds a trace of chroma into the neutrals, so greys read as belonging to the
+ * palette rather than borrowed from a framework. Warm roles sit at 55 and 85,
+ * success at its own 150 -- green is the one semantic colour with a universal
+ * convention, and spending the brand teal on it, as this theme used to, made
+ * "success" indistinguishable from "secondary".
+ *
+ * The warm pair carries DARK ink in both modes: they are far too light for
+ * white text. Every pairing here is enforced by `npm run themes:check`.
  */
 export const tide = defineTheme({
   id: "tide",
   label: "Tide",
 
   light: {
-    surface: "#f4f7f6",
-    surfaceRaised: "#ffffff",
-    surfaceSunken: "#e9efee",
+    surface: "oklch(0.978 0.004 185)",
+    surfaceRaised: "oklch(1 0 185)",
+    surfaceSunken: "oklch(0.955 0.008 185)",
 
-    border: "#d7e2e0",
-    // Darker than it looks like it should be: a "meaningful" border has to
-    // clear 3:1 as non-text contrast, and the softer #b4c7c4 this palette
-    // started from only manages 2.0:1 on white.
-    borderStrong: "#7d9390",
+    border: "oklch(0.905 0.012 185)",
+    // Held to 3:1 as non-text contrast, which is darker than it looks like it
+    // should be -- a border that only suggests a boundary communicates nothing.
+    borderStrong: "oklch(0.645 0.022 185)",
 
-    ink: "#051821",
-    inkMuted: "#33514f",
-    inkSubtle: "#456663",
+    ink: "oklch(0.270 0.032 185)",
+    inkMuted: "oklch(0.430 0.030 185)",
+    inkSubtle: "oklch(0.520 0.026 185)",
 
-    primary: "#1a4645",
-    primaryInk: "#ffffff",
+    primary: "oklch(0.440 0.075 185)",
+    primaryInk: "oklch(1 0 185)",
 
-    secondary: "#266867",
-    secondaryInk: "#ffffff",
+    // Bluer than primary rather than lighter: two teals separated only by
+    // lightness stop reading as different roles at badge size.
+    secondary: "oklch(0.505 0.070 210)",
+    secondaryInk: "oklch(1 0 185)",
 
-    accent: "#f58800",
-    accentInk: "#051821",
-    accentText: "#8f4a00",
+    accent: "oklch(0.740 0.165 55)",
+    accentInk: "oklch(0.270 0.032 185)",
+    accentText: "oklch(0.550 0.130 55)",
 
-    warn: "#f8bc24",
-    warnInk: "#051821",
-    warnText: "#755300",
+    warn: "oklch(0.845 0.150 85)",
+    warnInk: "oklch(0.270 0.032 185)",
+    warnText: "oklch(0.535 0.115 85)",
 
-    success: "#266867",
-    successInk: "#ffffff",
-    successText: "#1c4f4e",
+    success: "oklch(0.545 0.110 150)",
+    successInk: "oklch(1 0 185)",
+    successText: "oklch(0.480 0.100 150)",
 
-    // The one colour outside the source palette. Orange already means "urgent"
-    // here, so destructive actions need a hue that cannot be mistaken for it.
-    danger: "#b3352a",
-    dangerInk: "#ffffff",
-    dangerText: "#9c2d23",
+    danger: "oklch(0.545 0.180 25)",
+    dangerInk: "oklch(1 0 185)",
+    dangerText: "oklch(0.540 0.165 25)",
 
-    // Raw orange cannot be the focus ring on a light ground -- it is 2.36:1
-    // against #f4f7f6, under the 3:1 that non-text contrast requires. It also
-    // cannot be `primary`: the ring sits 2px outside the control, so matching
-    // it just makes a primary button look slightly bigger when focused. A
-    // lighter teal clears both.
-    focus: "#2f8583",
+    // Its own hue on purpose. The ring sits 2px outside a control, and one that
+    // matches the control it outlines reads as a slightly larger button.
+    focus: "oklch(0.570 0.115 235)",
   },
 
   dark: {
-    surface: "#051821",
-    surfaceRaised: "#0c282a",
-    surfaceSunken: "#03121a",
+    surface: "oklch(0.205 0.018 185)",
+    surfaceRaised: "oklch(0.258 0.021 185)",
+    surfaceSunken: "oklch(0.170 0.016 185)",
 
-    border: "#1a4645",
-    borderStrong: "#3a7f7d",
+    border: "oklch(0.325 0.024 185)",
+    borderStrong: "oklch(0.540 0.032 185)",
 
-    ink: "#eaf2f1",
-    inkMuted: "#a9bfbe",
-    inkSubtle: "#8aa4a2",
+    ink: "oklch(0.930 0.014 185)",
+    inkMuted: "oklch(0.740 0.020 185)",
+    inkSubtle: "oklch(0.640 0.022 185)",
 
-    primary: "#4e9c9a",
-    primaryInk: "#051821",
+    primary: "oklch(0.680 0.090 185)",
+    primaryInk: "oklch(0.205 0.018 185)",
 
-    secondary: "#266867",
-    secondaryInk: "#eaf2f1",
+    secondary: "oklch(0.620 0.080 210)",
+    secondaryInk: "oklch(0.205 0.018 185)",
 
-    accent: "#f58800",
-    accentInk: "#051821",
-    accentText: "#ffab4d",
+    accent: "oklch(0.760 0.160 55)",
+    accentInk: "oklch(0.205 0.018 185)",
+    accentText: "oklch(0.780 0.130 55)",
 
-    warn: "#f8bc24",
-    warnInk: "#051821",
-    warnText: "#f8cf6b",
+    warn: "oklch(0.860 0.150 85)",
+    warnInk: "oklch(0.205 0.018 185)",
+    warnText: "oklch(0.860 0.110 85)",
 
-    success: "#46a3a1",
-    successInk: "#051821",
-    successText: "#6fc9c7",
+    success: "oklch(0.720 0.115 150)",
+    successInk: "oklch(0.205 0.018 185)",
+    successText: "oklch(0.780 0.105 150)",
 
-    danger: "#e0594c",
-    dangerInk: "#051821",
-    dangerText: "#ff9084",
+    danger: "oklch(0.665 0.165 25)",
+    dangerInk: "oklch(0.205 0.018 185)",
+    dangerText: "oklch(0.740 0.140 25)",
 
-    focus: "#7fd4d2",
+    focus: "oklch(0.760 0.110 235)",
   },
 });

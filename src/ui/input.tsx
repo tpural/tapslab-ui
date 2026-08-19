@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 import { cn } from "../lib/cn";
 
 const field =
-  "w-full rounded-md border border-border bg-surface-sunken px-3 py-2 text-sm text-ink " +
+  "w-full rounded-md border border-border bg-surface-sunken px-3.5 py-2.5 text-sm text-ink " +
   "placeholder:text-ink-subtle transition-colors " +
   "hover:border-border-strong " +
   "disabled:cursor-not-allowed disabled:opacity-50 " +

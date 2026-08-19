@@ -39,8 +39,8 @@ function ToastList() {
       key={toast.id}
       toast={toast}
       className={cn(
-        "relative flex w-full items-start gap-3 rounded-lg border border-border " +
-          "bg-surface-raised p-4 shadow-lg transition-all duration-200 " +
+        "relative flex w-full items-start gap-3 rounded-xl border border-border/70 " +
+          "bg-surface-raised p-4 elevate-3 transition-all duration-200 " +
           "data-starting-style:translate-y-3 data-starting-style:opacity-0 " +
           "data-ending-style:translate-y-3 data-ending-style:opacity-0",
         toast.type === "error" && "border-danger/40",

@@ -30,19 +30,19 @@ export function PageShell({
         Skip to content
       </a>
 
-      <header className="sticky top-0 z-40 border-b border-border bg-surface/85 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 w-full max-w-5xl items-center gap-6 px-4">
+      <header className="sticky top-0 z-40 border-b border-border/70 bg-surface/80 backdrop-blur-xl backdrop-saturate-150">
+        <div className="mx-auto flex h-16 w-full max-w-5xl items-center gap-6 px-5">
           <div className="font-semibold tracking-tight">{brand}</div>
           {nav ? <nav className="flex flex-1 items-center gap-1">{nav}</nav> : <div className="flex-1" />}
           {actions ? <div className="flex items-center gap-1">{actions}</div> : null}
         </div>
       </header>
 
-      <main id="main" className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">{children}</main>
+      <main id="main" className="mx-auto w-full max-w-5xl flex-1 px-5 py-10">{children}</main>
 
       {footer ? (
-        <footer className="border-t border-border">
-          <div className="mx-auto w-full max-w-5xl px-4 py-6 text-sm text-ink-subtle">
+        <footer className="border-t border-border/70">
+          <div className="mx-auto w-full max-w-5xl px-5 py-8 text-sm text-ink-subtle">
             {footer}
           </div>
         </footer>
@@ -64,10 +64,14 @@ export function PageHeader({
   className?: string;
 }) {
   return (
-    <div className={cn("mb-6 flex items-start justify-between gap-4", className)}>
-      <div className="space-y-1">
-        <h1 className="text-2xl font-semibold tracking-tight text-ink">{title}</h1>
-        {description ? <p className="text-sm text-ink-muted">{description}</p> : null}
+    <div className={cn("mb-8 flex items-start justify-between gap-4", className)}>
+      {/* The old 24px-against-16px title was a 1.5 ratio, which is not enough
+          separation for it to be the first thing read on the page. */}
+      <div className="space-y-2">
+        <h1 className="text-3xl font-semibold text-ink">{title}</h1>
+        {description ? (
+          <p className="max-w-2xl text-[0.9375rem] text-ink-muted">{description}</p>
+        ) : null}
       </div>
       {action ? <div className="shrink-0">{action}</div> : null}
     </div>

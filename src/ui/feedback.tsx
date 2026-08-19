@@ -37,13 +37,13 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center gap-3 rounded-lg border " +
-          "border-dashed border-border-strong px-6 py-14 text-center",
+        "flex flex-col items-center justify-center gap-3 rounded-xl " +
+          "bg-surface-sunken/50 px-6 py-16 text-center",
         className,
       )}
     >
       {icon ? (
-        <div className="flex size-11 items-center justify-center rounded-full bg-surface-sunken text-ink-subtle [&_svg]:size-5">
+        <div className="flex size-12 items-center justify-center rounded-full bg-surface-raised text-ink-subtle elevate-1 [&_svg]:size-5">
           {icon}
         </div>
       ) : null}
@@ -74,17 +74,17 @@ export function Callout({
   className?: string;
 }) {
   const styles = {
-    neutral: "border-border bg-surface-sunken text-ink",
-    accent: "border-accent/30 bg-accent/10 text-accent-text",
-    success: "border-success/30 bg-success/10 text-success-text",
-    warn: "border-warn/40 bg-warn/10 text-warn-text",
-    danger: "border-danger/30 bg-danger/10 text-danger-text",
+    neutral: "bg-surface-sunken text-ink",
+    accent: "bg-accent-tint text-accent-text",
+    success: "bg-success-tint text-success-text",
+    warn: "bg-warn-tint text-warn-text",
+    danger: "bg-danger-tint text-danger-text",
   }[variant];
 
   return (
     <div
       role={variant === "danger" ? "alert" : undefined}
-      className={cn("rounded-lg border px-4 py-3 text-sm", styles, className)}
+      className={cn("rounded-lg px-4 py-3.5 text-sm", styles, className)}
     >
       {title ? <p className="font-semibold">{title}</p> : null}
       {children ? <div className={cn(title && "mt-1")}>{children}</div> : null}

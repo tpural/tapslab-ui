@@ -1,15 +1,51 @@
 import type { ThemeTokens } from "../src/themes/tokens";
 
-/** WCAG relative luminance. */
-function luminance(hex: string): number {
-  const m = /^#?([0-9a-f]{6})$/i.exec(hex.trim());
-  if (!m) throw new Error(`Not a 6-digit hex colour: ${hex}`);
+/**
+ * Colours are authored in oklch so tints and shades can be derived rather than
+ * hand-picked. WCAG luminance is defined over sRGB, so the ratio maths needs a
+ * conversion: oklch -> oklab -> linear sRGB. Hex is still accepted, because a
+ * one-off literal in a theme is not worth a conversion.
+ */
+type Rgb = [number, number, number];
+
+function parseOklch(value: string): Rgb | null {
+  const m = /^oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)\s*\)$/i.exec(value.trim());
+  if (!m) return null;
+
+  const L = m[1].endsWith("%") ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
+  const C = parseFloat(m[2]);
+  const hRad = (parseFloat(m[3]) * Math.PI) / 180;
+
+  const a = C * Math.cos(hRad);
+  const b = C * Math.sin(hRad);
+
+  // oklab -> LMS -> linear sRGB, the inverse of Björn Ottosson's forward matrices.
+  const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3;
+  const m2 = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3;
+  const s2 = (L - 0.0894841775 * a - 1.291485548 * b) ** 3;
+
+  return [
+    +4.0767416621 * l - 3.3077115913 * m2 + 0.2309699292 * s2,
+    -1.2684380046 * l + 2.6097574011 * m2 - 0.3413193965 * s2,
+    -0.0041960863 * l - 0.7034186147 * m2 + 1.707614701 * s2,
+  ];
+}
+
+function parseHex(value: string): Rgb | null {
+  const m = /^#?([0-9a-f]{6})$/i.exec(value.trim());
+  if (!m) return null;
   const int = parseInt(m[1], 16);
-  const channels = [(int >> 16) & 255, (int >> 8) & 255, int & 255].map((v) => {
-    const c = v / 255;
-    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-  });
-  return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+  return [((int >> 16) & 255) / 255, ((int >> 8) & 255) / 255, (int & 255) / 255].map((c) =>
+    c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4,
+  ) as Rgb;
+}
+
+/** WCAG relative luminance, from either notation. */
+function luminance(colour: string): number {
+  const linear = parseOklch(colour) ?? parseHex(colour);
+  if (!linear) throw new Error(`Not an oklch() or 6-digit hex colour: ${colour}`);
+  const [r, g, b] = linear.map((c) => Math.min(Math.max(c, 0), 1));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
 /** WCAG contrast ratio, 1..21. */

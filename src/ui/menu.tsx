@@ -21,8 +21,8 @@ export function MenuContent({
       <Base.Positioner className="z-50 outline-none" sideOffset={sideOffset} align={align}>
         <Base.Popup
           className={cn(
-            "min-w-40 origin-[var(--transform-origin)] rounded-md border border-border " +
-              "bg-surface-raised py-1 shadow-lg outline-none " +
+            "min-w-44 origin-[var(--transform-origin)] rounded-lg border border-border/70 " +
+              "bg-surface-raised p-1 elevate-3 outline-none " +
               "transition-[opacity,scale] duration-100 ease-out " +
               "data-starting-style:scale-[0.98] data-starting-style:opacity-0 " +
               "data-ending-style:scale-[0.98] data-ending-style:opacity-0",
@@ -43,8 +43,9 @@ export function MenuItem({
   return (
     <Base.Item
       className={cn(
-        "flex cursor-default items-center gap-2 px-3 py-1.5 text-sm outline-none " +
-          "select-none data-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+        "flex cursor-default items-center gap-2.5 rounded-sm px-2.5 py-2 text-sm " +
+          "outline-none select-none data-disabled:opacity-50 " +
+          "[&_svg]:size-4 [&_svg]:shrink-0",
         // Destructive keeps its tint until highlighted, then inverts onto the
         // danger fill -- so the "this deletes something" signal survives hover
         // rather than being replaced by the generic highlight.
@@ -59,5 +60,5 @@ export function MenuItem({
 }
 
 export function MenuSeparator({ className, ...props }: ComponentProps<typeof Base.Separator>) {
-  return <Base.Separator className={cn("my-1 h-px bg-border", className)} {...props} />;
+  return <Base.Separator className={cn("my-1 h-px bg-border/70", className)} {...props} />;
 }

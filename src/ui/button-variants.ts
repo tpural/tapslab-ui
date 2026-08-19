@@ -14,25 +14,31 @@ import { cva, type VariantProps } from "class-variance-authority";
  */
 export const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 rounded-md font-medium " +
-    "transition-colors cursor-pointer whitespace-nowrap " +
+    "cursor-pointer whitespace-nowrap select-none " +
+    // Two properties, two durations. Colour settles slowly enough to read;
+    // the press has to feel immediate or it reads as lag rather than feedback.
+    "transition-[background-color,border-color,color,box-shadow,transform] duration-150 " +
+    "active:scale-[0.985] active:duration-75 " +
     "disabled:pointer-events-none disabled:opacity-50 " +
     "[&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        primary: "bg-primary text-primary-ink hover:opacity-90",
-        secondary: "bg-secondary text-secondary-ink hover:opacity-90",
-        accent: "bg-accent text-accent-ink hover:opacity-90",
-        danger: "bg-danger text-danger-ink hover:opacity-90",
-        outline:
-          "border border-border-strong bg-transparent text-ink hover:bg-surface-sunken",
-        ghost: "bg-transparent text-ink hover:bg-surface-sunken",
+        // hover mixes toward ink rather than dropping opacity: a translucent
+        // button picks up whatever is behind it, which on a card is the wrong
+        // colour and on an image is unreadable.
+        primary: "bg-primary text-primary-ink hover:bg-primary-hover elevate-1",
+        secondary: "bg-secondary text-secondary-ink hover:bg-secondary-hover elevate-1",
+        accent: "bg-accent text-accent-ink hover:bg-accent-hover elevate-1",
+        danger: "bg-danger text-danger-ink hover:bg-danger-hover elevate-1",
+        outline: "border border-border-strong bg-transparent text-ink hover:bg-surface-hover",
+        ghost: "bg-transparent text-ink-muted hover:bg-surface-hover hover:text-ink",
         link: "bg-transparent text-accent-text underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-8 px-3 text-sm",
+        sm: "h-8 gap-1.5 rounded-sm px-3 text-sm",
         md: "h-10 px-4 text-sm",
-        lg: "h-11 px-6 text-base",
+        lg: "h-12 rounded-lg px-6 text-base",
         icon: "size-10",
       },
     },

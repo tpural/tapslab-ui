@@ -35,8 +35,8 @@ export function DialogContent({
       <Base.Popup
         className={cn(
           "fixed top-1/2 left-1/2 z-50 w-[min(28rem,calc(100vw-2rem))] " +
-            "-translate-x-1/2 -translate-y-1/2 rounded-xl border border-border " +
-            "bg-surface-raised p-6 text-ink shadow-xl outline-none " +
+            "-translate-x-1/2 -translate-y-1/2 rounded-2xl border border-border/70 " +
+            "bg-surface-raised p-7 text-ink elevate-3 outline-none " +
             "transition-[opacity,scale] duration-150 ease-out " +
             "data-starting-style:scale-[0.97] data-starting-style:opacity-0 " +
             "data-ending-style:scale-[0.97] data-ending-style:opacity-0",

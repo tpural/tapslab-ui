@@ -48,7 +48,7 @@ export function Select({
         id={id}
         className={cn(
           "flex h-10 w-full items-center justify-between gap-2 rounded-md border " +
-            "border-border bg-surface-sunken px-3 text-sm text-ink transition-colors " +
+            "border-border bg-surface-sunken px-3.5 text-sm text-ink transition-colors " +
             "hover:border-border-strong data-disabled:cursor-not-allowed data-disabled:opacity-50",
           className,
         )}
@@ -64,8 +64,8 @@ export function Select({
           <Base.Popup
             className={
               "max-h-[var(--available-height)] min-w-[var(--anchor-width)] " +
-              "origin-[var(--transform-origin)] overflow-hidden rounded-md border " +
-              "border-border bg-surface-raised py-1 shadow-lg outline-none " +
+              "origin-[var(--transform-origin)] overflow-hidden rounded-lg border " +
+              "border-border/70 bg-surface-raised p-1 elevate-3 outline-none " +
               "transition-[opacity,scale] duration-100 ease-out " +
               "data-starting-style:scale-[0.98] data-starting-style:opacity-0 " +
               "data-ending-style:scale-[0.98] data-ending-style:opacity-0"
