@@ -1,6 +1,8 @@
 export { cn } from "./lib/cn";
 
-export { Button, buttonVariants, type ButtonProps } from "./ui/button";
+export { Button, type ButtonProps } from "./ui/button";
+// Separate module so Server Components can style a <Link> as a button.
+export { buttonVariants, type ButtonVariantProps } from "./ui/button-variants";
 export { Input, Textarea, Label, Field } from "./ui/input";
 export { Badge, type BadgeProps } from "./ui/badge";
 export {
