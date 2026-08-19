@@ -20,6 +20,16 @@ export function PageShell({
 }) {
   return (
     <div className="flex min-h-dvh flex-col bg-surface text-ink">
+      {/* Off-screen until focused. Without it every page starts with a tab
+          through the brand, the nav and the theme switcher before reaching
+          anything the visitor came for. */}
+      <a
+        href="#main"
+        className="sr-only rounded-md bg-primary px-4 py-2 text-primary-ink focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50"
+      >
+        Skip to content
+      </a>
+
       <header className="sticky top-0 z-40 border-b border-border bg-surface/85 backdrop-blur-sm">
         <div className="mx-auto flex h-14 w-full max-w-5xl items-center gap-6 px-4">
           <div className="font-semibold tracking-tight">{brand}</div>
@@ -28,7 +38,7 @@ export function PageShell({
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">{children}</main>
+      <main id="main" className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">{children}</main>
 
       {footer ? (
         <footer className="border-t border-border">

@@ -50,6 +50,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement;
     // Read back what the inline script stamped rather than re-reading storage,
     // so there is a single source of truth for "what is on screen".
+    //
+    // This has to be an effect. State is initialised to the defaults so the
+    // server and the first client render agree; the real values only exist in
+    // the DOM, put there by a script that ran before React. Reading them during
+    // render is exactly the hydration mismatch the inline script exists to
+    // avoid.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setThemeState(root.getAttribute("data-theme") || DEFAULT_THEME_ID);
     const domMode = root.getAttribute("data-mode");
     setModeState(domMode === "dark" || domMode === "light" ? domMode : "system");

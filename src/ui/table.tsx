@@ -33,9 +33,12 @@ export function TableRow({ className, ...props }: ComponentProps<"tr">) {
   );
 }
 
-export function TableHead({ className, ...props }: ComponentProps<"th">) {
+/** `scope` defaults to "col": without it a screen reader reads cells as a flat
+ *  list rather than announcing which column each one belongs to. */
+export function TableHead({ className, scope = "col", ...props }: ComponentProps<"th">) {
   return (
     <th
+      scope={scope}
       className={cn(
         "h-10 px-4 text-left align-middle text-xs font-semibold tracking-wide " +
           "text-ink-muted uppercase",
